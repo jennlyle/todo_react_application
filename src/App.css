@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: #e2e4fe;
+}
+
+@media only screen and (min-width: 576px) {
+  body {
+      background-color: #d4d7fe;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+      background-color: #c6cafe;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body {
+      background-color: #b8bdfe;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  body {
+      background-color: #afaffd;
+  }
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+}
+
+.container-fluid{
+  text-align: center;
+}
+
+.col-sm-3 {
+  border: solid 1px;
+  border-color: #8d95fd;
+  background-color: #ffffff;
+}
