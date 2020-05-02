@@ -1,0 +1,8 @@
+.task-item__text {
+    color: darkblue;
+}
+
+.task-item__done-button, 
+.task-item__delete-button {
+    background-color: coral;
+}
