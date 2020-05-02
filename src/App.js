@@ -26,7 +26,6 @@ function App() {
 
       { /* ADD TASK COMPONENT */ }
       <p clear="all" />
-      <p>Add Task Comp</p>
 
       <div className="container">
         <div className="row">
