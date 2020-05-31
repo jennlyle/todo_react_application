@@ -1,20 +1,29 @@
 import React from 'react';
 import './TaskItem.css';
-import TasksLeftToDo from '../TasksLeftToDo/TasksLeftToDo';
 
 function TaskItem(props) {
   return (
-
-
-
-    <div className="col-sm-3">
-      <p>{ props.text }</p>
-      <button className="tasktn btn-success">Completed</button>
-        <button className="btn btn-warning">Delete</button>
+    <div className="container">
+      <div className="row">
+      <div className="col-md-8">
+          <li>
+            { props.text }
+          </li>
+        </div>
+        <div className="col-md-4">
+              <button 
+                className="btn btn-outline-success btn-lg" 
+                onClick={ () => props.completeTask(props.id) }>
+                  Completed
+              </button> &nbsp; 
+              <button 
+                className="btn btn-outline-warning btn-lg" 
+                onClick={ () => props.deleteTask(props.id) }>
+                  Delete
+              </button> 
+        </div>
+      </div>
     </div>
-
-
-
   );
 }
 export default TaskItem;

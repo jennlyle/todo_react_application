@@ -1,0 +1,106 @@
+ToDo App Database Population Scripts
+==========================================
+
+INSERT INTO complete_status (complete_status_id, text) VALUES ('', 'Active');
+
+INSERT INTO complete_status (complete_status_id, text) VALUES ('', 'Completed');
+
+INSERT INTO complete_status (complete_status_id, text) VALUES ('', 'Deleted');
+
+SELECT * FROM complete_status;
+
+(( Make note of the ID's there -- 1 - Active; 2 - Completed; 3 - Deleted ))
+
+
+
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	jennifer.g.lyle@gmail.com	', '	dsgx6TusavTzQd4F	', '	Jennifer	', '	Calland	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	unreal@gmail.com	', '	AeHYV2v4sJ58cdKb	', '	Chris	', '		');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	sherzodr@live.com	', '	CBWq6fTgtFhps44E	', '	Sherry	', '	Zodr	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	khris@optonline.net	', '	L9pGpyR32B5yD8LV	', '	Khris	', '	Jenkins	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	isaacson@mac.com	', '	7hkHta4KJRqJw3GH	', '	Issac	', '	Son	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	jugalator@sbcglobal.net	', '	UENvNjB9Z4a97K4P	', '	Jurien	', '	Lattor	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	shawnce@me.com	', '	wEHe6fGRJJAtgzCW	', '	Shawn	', '		');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	sbmrjbr@comcast.net	', '	nf8phC38vf5b2QtQ	', '	Sam	', '		');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	ianbuck@sbcglobal.net	', '	3cDb8G9gbqhbfmry	', '	Ian	', '	Buck	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	citadel@hotmail.com	', '	UCBRAAe3CA4nm6tG	', '	Tony	', '	Stark	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	sfoskett@outlook.com	', '	yTnug2uTbqDqAA6x	', '	Sarah	', '	Kett	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	ryanshaw@mac.com	', '	jyLMVEcPZDTXr6GD	', '	Ryan	', '	Shaw	');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	gator@live.com	', '	fQ4u5S76KTtKC842	', '	Troy	', '		');
+INSERT INTO users (user_id, email, password, first_name, surname) VALUES ('', '	andersbr@aol.com	', '	36PSRaX4zeSCTmVB	', '	Andrea	', '	Bower	');
+
+SELECT * FROM users;
+
+
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	1	','	Water the plants	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	2	','	Dishes	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	3	','	Dinner	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	4	','	Wash the car	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	5	','	Wash the dog	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	6	','	Grocery shopping	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	7	','	Make bed	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	8	','	Do laundry	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	9	','	Homework	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	10	','	Write letter to council	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	11	','	Follow up on CV	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	12	','	Rewirte meeting notes	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	13	','	Set up meeting with governors	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	14	','	Feed the cat	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	1	','	Buy things from Amazon	','	2	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	1	','	Run errands	','	3	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	1	','	Pick up medicine	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	2	','	Drop off kids at football	','	2	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	2	','	Write questions for next meeting	','	3	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	2	','	Buy sticky-notes	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	2	','	Print out kids homework	','	2	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	3	','	Make time for reading	','	3	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	3	','	Take out the trash	','	1	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	3	','	Buy new shoes	','	2	');
+INSERT INTO  tasks (task_id, user_id, text, complete_status_id) VALUES ('', '	3	','	Make haircut appointment	','	1	');
+
+
+SELECT * FROM tasks;
+
+
+(( Now testing some queries ))
+
+(( To pull up my active tasks ))
+
+SELECT tasks.task_id, tasks.text, complete_status.text 
+	FROM tasks, complete_status, users
+WHERE ((users.surname = 'Calland') AND 
+	(users.user_id = tasks.user_id) AND 
+	(tasks.complete_status_id = complete_status.complete_status_id) AND 
+	(complete_status.text = 'Active'));
+
+
+(( To pull up my Completed tasks ))
+
+SELECT tasks.task_id, tasks.text, complete_status.text 
+	FROM tasks, complete_status, users
+WHERE ((users.surname = 'Calland') AND 
+	(users.user_id = tasks.user_id) AND 
+	(tasks.complete_status_id = complete_status.complete_status_id) AND 
+	(complete_status.text = 'Completed'));
+
+
+(( Adding a Task ))
+
+INSERT INTO tasks (task_id, user_id, text, complete_status_id) VALUES ('', '1', 'Call school', '1');
+
+(( Pull up my active tasks to see its there ))
+
+
+(( 'Deleting a Task ))
+
+UPDATE tasks 
+	SET complete_status_id = '3' 
+	WHERE tasks.task_id = '1';
+
+(( run 'deleted' tasks query to see its moved here ))
+
+SELECT tasks.task_id, tasks.text, complete_status.text 
+	FROM tasks, complete_status, users
+WHERE ((users.surname = 'Calland') AND 
+	(users.user_id = tasks.user_id) AND 
+	(tasks.complete_status_id = complete_status.complete_status_id) AND 
+	(complete_status.text = 'Deleted'));
