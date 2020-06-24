@@ -12,12 +12,12 @@ function CompletedTask(props) {
         <div className="col-md-4">
               <button 
                 className="btn btn-outline-primary btn-lg" 
-                onClick={ () => props.activateTask(props.id) }>
+                onClick={ () => props.activateTask(props.task_id) }>
                   Activate
               </button> &nbsp;
               <button 
                 className="btn btn-outline-warning btn-lg" 
-                onClick={ () => props.deleteTask(props.id) }>
+                onClick={ () => props.deleteTask(props.task_id) }>
                   Delete
               </button> 
         </div>

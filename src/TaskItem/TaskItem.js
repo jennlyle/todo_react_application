@@ -8,17 +8,18 @@ function TaskItem(props) {
       <div className="col-md-8">
           <li>
             { props.text }
+            {/* {console.log(props)} */}
           </li>
         </div>
         <div className="col-md-4">
               <button 
                 className="btn btn-outline-success btn-lg" 
-                onClick={ () => props.completeTask(props.id) }>
+                onClick={ () => props.completeTask(props.task_id) }>
                   Completed
               </button> &nbsp; 
               <button 
                 className="btn btn-outline-warning btn-lg" 
-                onClick={ () => props.deleteTask(props.id) }>
+                onClick={ () => props.deleteTask(props.task_id) }>
                   Delete
               </button> 
         </div>

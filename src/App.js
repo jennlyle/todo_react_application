@@ -1,124 +1,225 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import AddTask from "./AddTask/AddTask"
-import TaskItem from "./TaskItem/TaskItem"
-import CompletedTask from "./CompletedTask/CompletedTask"
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+import AddTask from "./AddTask/AddTask";
+import TaskItem from "./TaskItem/TaskItem";
+import CompletedTask from "./CompletedTask/CompletedTask";
+
 
 import './App.css';
 
 function App() {
 
-  const [ tasks, setTasks ] = useState([
-    { id: uuidv4(), text: "This task consists of having to do the following things in order to fill up some space.", completed: false },
-    { id: uuidv4(), text: "This task doesn't take up as much space.", completed: false },
-    { id: uuidv4(), text: "This task should take up about as much space as Task 1 should take.", completed: false },
-    { id: uuidv4(), text: "This task is super short.", completed: false },
-    { id: uuidv4(), text: "I'm confused on why the 'completed' button has a shadow.", completed: false },
-    { id: uuidv4(), text: "I also wish I could make the 'completed' and 'delete' buttons flush with the bottom of each 'card' in wide view.", completed: false },
-    { id: uuidv4(), text: "And I got a lot of criticism for the color scheme I picked, but I always depended on someone else to get the colors right.", completed: false },
-    { id: uuidv4(), text: "Look at this completed task.  Job well done!", completed: true },
-    { id: uuidv4(), text: "Let's have some text and some back patting to show how cool this app can be.", completed: true },
-    { id: uuidv4(), text: "I wonder if these would be time stamped in the database, or if that is excess to requirements.", completed: true },
-    { id: uuidv4(), text: "I think I might make the border card colors a bit closer to the background.", completed: true },
-    { id: uuidv4(), text: "This fifth task to edge-test the bootstrap css", completed: true }
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading ] = useState(false);
 
-  const activeTasks = tasks.filter(task => !task.completed);
-  const completedTasks = tasks.filter(task => task.completed);
+    // Play with Cookies
+    Cookies.set('user_id', '1', { expires: 1 });
+    //Cookies.get('user_id');
+    //console.log("My user_ID is " + Cookies.get('user_id'));
+    //Cookies.remove('user_id');
 
-  function deleteTask(id) {
-    const updatedTasks = tasks.filter(task => task.id !== id);
+  useEffect(() => {
+    setLoading(true);
+    axios
+    .get(`https://q6to3w78jj.execute-api.eu-west-1.amazonaws.com/dev/tasks?user_id=${Cookies.get("user_id")}`)
+    .then(response => {
+        // request is successful, run this
+        console.log(response.data);
+        setTasks(response.data.tasks);
+        setLoading(false);
+      })
+    .catch(
+      (error) => {
+        //request is given an error, run this
+        console.log('Error fetching data', error);
+        setLoading(false);
+      });
+  }, []);
+
+  const activeTasks = tasks && tasks.filter(task => task.complete_status_id === 1);
+  const completedTasks = tasks && tasks.filter(task => task.complete_status_id === 2);
+
+  function deleteTask(task_id) {
+    const updatedTasks = tasks.filter(task => task.task_id !== task_id);
     setTasks(updatedTasks);
+    const updatedTask = {
+      task_id: task_id,
+      complete_status_id: 3
+    }
+  
+    axios
+    .put(`https://q6to3w78jj.execute-api.eu-west-1.amazonaws.com/dev/tasks/${task_id}`, updatedTask)
+    .then(
+      // if the request is successful, consolelog the results
+      (response) => {
+        console.log(response);
+        //const updatedTasks = [ ...tasks, updatedTask ]
+      }
+    )
+    .catch((error) => {
+      console.log('Error updating a task', error)
+    })
   }
 
-  function completeTask(id){
+ function completeTask(task_id){
     const updatedTasks = tasks.map(task => {
-      if (task.id === id){
-        task.completed = true;
+      if (task.task_id === task_id){
+        task.complete_status_id = 2;
       }
       return task;
     });
     setTasks(updatedTasks);
+    const updatedTask = {
+      task_id: task_id,
+      complete_status_id: 2
+    }
+  
+    axios
+    .put(`https://q6to3w78jj.execute-api.eu-west-1.amazonaws.com/dev/tasks/${task_id}`, updatedTask)
+    .then(
+      // if the request is successful, consolelog the results
+      (response) => {
+        console.log(response);
+        //const updatedTasks = [ ...tasks, updatedTask ]
+      }
+    )
+    .catch((error) => {
+      console.log('Error updating a task', error)
+    })
   }
 
-  function activateTask(id){
+  function activateTask(task_id){
     const updatedTasks = tasks.map(task => {
-      if (task.id === id){
-        task.completed = false;
+      if (task.task_id === task_id){
+        task.complete_status_id = 1;
       }
       return task;
     });
     setTasks(updatedTasks);
+    const updatedTask = {
+      task_id: task_id,
+      complete_status_id: 1
+    }
+  
+    axios
+    .put(`https://q6to3w78jj.execute-api.eu-west-1.amazonaws.com/dev/tasks/${task_id}`, updatedTask)
+    .then(
+      // if the request is successful, consolelog the results
+      (response) => {
+        console.log(response);
+        //const updatedTasks = [ ...tasks, updatedTask ]
+      }
+    )
+    .catch((error) => {
+      console.log('Error updating a task', error)
+    })
   }
 
   function addTask(text){
     const newTask = {
-      id: uuidv4(), 
-      text: text, 
-      completed: false 
+      task_id: "",
+      user_id: Cookies.get('user_id'),
+      text: text,
+      complete_status_id: 1
     }
     const updatedTasks = [ ...tasks, newTask ];
     setTasks(updatedTasks);
+  
+      axios
+      .post('https://q6to3w78jj.execute-api.eu-west-1.amazonaws.com/dev/tasks', newTask)
+      .then(
+        // if the request is successful, get the task id and add it to the 
+        // new task object
+        (response) => {
+          //console.log(response.data);
+          newTask.task_id = response.data.data.insertId;
+          //console.log(newTask);
+          const updatedTasks = [ ...tasks, newTask ]
+          setTasks(updatedTasks);
+          //console.log(tasks);
+        }
+      )
+      .catch((error) => {
+        console.log('Error adding a task', error);
+      })
   }
 
-  return (
-    <div className="App">
-      <header className="container">
-        <h1>My To-Do List</h1>
-      </header>
-
-      <div className="container">
-        <div className="row task">
-        <div className="col-md-8">
-            <AddTask addTask= { addTask } />
-          </div>
-          <div className="col-md-4 text-right">
-            <h2>
-                You have { activeTasks.length } { activeTasks.length === 1 ? "task" : "tasks" } to do
-            </h2>
-          </div>
+  if (!Cookies.get('user_id')){
+    return(
+      <div className="App">
+        <header className="container">
+          <h1>Login</h1>
+        </header>
+        <div>
+          You are not logged in.
         </div>
       </div>
+    );
+  }
+  else {
+      return (
+        <div className="App">
+          <header className="container">
+            <h1>My To-Do List</h1>
+          </header>
 
-      <p></p>
-
-      <div className="container">
-
-        <div className="row task">
-          <div className="col-md-12">
-            <ol>
-              { activeTasks.map(task => <TaskItem 
-                completeTask = { completeTask } 
-                deleteTask={ deleteTask }  
-                id={ task.id } 
-                key={ task.id }
+          <div className="container">
+            <div className="row task">
+            <div className="col-md-8">
+                <AddTask addTask= { addTask } />
+              </div>
+              <div className="col-md-4 text-right">
+                <h2>
+                    You have { activeTasks.length } { activeTasks.length === 1 ? "task" : "tasks" } to do
+                </h2>
+              </div>
+            </div>
+          </div>
+          <p></p>
+          <div className="container">
+            <div className="row task">
+              <div className="col-md-12">
+                <ol>
+                  { activeTasks.map(task => <TaskItem 
+                    completeTask = { completeTask } 
+                    deleteTask={ deleteTask }  
+                    key={ task.task_id }
+                    task_id = { task.task_id } 
+                    user_id ={ task.user_id }  
+                    text={ task.text } 
+                    complete_status_id = { task.complete_status_id }
+                    />)}
+                </ol>
+              </div>
+            </div>
+            <p></p>
+            <div className="row task">
+              <div className="col-md-12">
+              <ol>
+                {completedTasks.map(task => <CompletedTask 
+                activateTask = { activateTask } 
+                deleteTask= { deleteTask } 
+                key={ task.task_id } 
+                task_id = { task.task_id } 
+                user_id ={ task.user_id }  
                 text={ task.text } 
+                complete_status_id = { task.complete_status_id }
                 />)}
-            </ol>
+              </ol>
+              </div>
+            </div> 
           </div>
+          <Footer />
         </div>
-
-        <p></p>
-
-        <div className="row task">
-          <div className="col-md-12">
-          <ol>
-            {completedTasks.map(task => <CompletedTask 
-            activateTask = { activateTask } 
-            deleteTask= { deleteTask } 
-            id={task.id } 
-            key={ task.id } 
-            text={ task.text }
-            />)}
-          </ol>
-          </div>
-        </div>
-        
-      </div>
-
-      <div className="container text-center">
-        <cite>&copy; Jennifer Calland 2020</cite> &nbsp;
-      </div>
+      );
+    }
+}
+function Footer() {
+  return (
+    <div className="container text-center">
+      <cite>&copy; Jennifer Calland 2020</cite> &nbsp;
     </div>
   );
 }
